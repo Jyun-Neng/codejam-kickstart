@@ -12,7 +12,8 @@ def solve(k):
         k //= 8
         return solve(k)
 
-t = int(input())
-for test in range(1, t + 1):
-    k = int(input())
-    print("Case #{}: {}".format(test, solve(k-1)))
+if __name__ == "__main__":
+    t = int(input())
+    for test in range(1, t + 1):
+        k = int(input())
+        print("Case #{}: {}".format(test, solve(k-1)))
