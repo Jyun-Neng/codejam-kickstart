@@ -1,18 +1,18 @@
-def solve(n, tickets):
+def solve(tickets):
     itinerary = []
+    order = []
+    src = next(iter(tickets))
     while tickets: 
-        src = next(iter(tickets))
-        order = []
-        while n != 0:
-            dst = tickets[src]
-            ticket = src + '-' + dst
-            order.append(ticket)
-            tickets.pop(src)    
-            n -= 1    
-            src = dst    
-            if tickets.get(src) is None:
-                break
-        itinerary = order + itinerary    
+        dst = tickets[src]
+        ticket = src + '-' + dst
+        order.append(ticket)
+        tickets.pop(src)    
+        src = dst    
+        if tickets.get(src) is None:
+            if tickets:
+                src = next(iter(tickets))
+            itinerary = order + itinerary    
+            order.clear()
     return itinerary 
 
 t = int(input())
@@ -23,4 +23,4 @@ for test in range(1, t + 1):
         src = input()
         dst = input()
         tickets[src] = dst
-    print("Case #{}: {}".format(test, ' '.join(solve(n, tickets))))
+    print("Case #{}: {}".format(test, ' '.join(solve(tickets))))
